@@ -9,8 +9,11 @@ services:
       - key: DJANGO_SECRET_KEY
         value: your-secret-key
       - key: DJANGO_DEBUG
-        value: false
+        value: 'False'  # Ensure this is a string; 'False' as a string is correct for Docker environment variables.
+      - key: DJANGO_ALLOWED_HOSTS
+        value: your-render-domain.onrender.com,localhost
     healthCheckPath: /
+
   - type: db
     name: postgres-db
     plan: free
