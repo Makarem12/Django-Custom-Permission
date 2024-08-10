@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: django-app
+    env: docker
+    plan: free
+    buildCommand: docker-compose build
+    startCommand: docker-compose up
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: your-secret-key
+      - key: DJANGO_DEBUG
+        value: false
+    healthCheckPath: /
+  - type: db
+    name: postgres-db
+    plan: free
+    engine: postgres
+    version: 14
+    disk: 10GB
+    envVars:
+      - key: POSTGRES_DB
+        value: postgres
+      - key: POSTGRES_USER
+        value: postgres
+      - key: POSTGRES_PASSWORD
+        value: postgres
