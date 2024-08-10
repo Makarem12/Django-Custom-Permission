@@ -52,15 +52,16 @@ WSGI_APPLICATION = 'things_project.wsgi.application'
 
 # Database configuration
 DATABASES = {
-  'default': {
-     'ENGINE':'django.db.backends.postgresql',
-     'NAME': 'postgres',
-     'USER': 'postgres',
-     'PASSWORD':'postgres',
-     'HOST': 'db',
-     'PORT': '5432',
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'postgres-db',  # This should match the name in `render.yaml`
+        'PORT': '5432',
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
