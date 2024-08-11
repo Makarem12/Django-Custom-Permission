@@ -7,11 +7,11 @@ services:
     startCommand: docker-compose up
     envVars:
       - key: DJANGO_SECRET_KEY
-        value: your-secret-key
+        value: django-insecure-t@gb%h+l50yt0y=c1bausx1o&@uj$uu*y+6r_5y(a+zcwp&(y)  
       - key: DJANGO_DEBUG
-        value: 'False'  # Ensure this is a string; 'False' as a string is correct for Docker environment variables.
+        value: 'False'  
       - key: DJANGO_ALLOWED_HOSTS
-        value: your-render-domain.onrender.com,localhost
+        value: django-custom-permission-2.onrender.com,localhost  
     healthCheckPath: /
 
   - type: db

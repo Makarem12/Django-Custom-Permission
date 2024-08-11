@@ -1,13 +1,17 @@
 from pathlib import Path
 import os
+import dj_database_url
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-t@gb%h+l50yt0y=c1bausx1o&@uj$uu*y+6r_5y(a+zcwp&(y)'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-default-secret-key')
 
-DEBUG = False
+DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['your-render-domain.onrender.com', 'localhost']
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', '').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,18 +54,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'things_project.wsgi.application'
 
-# Database configuration
+# Use dj_database_url to parse the DATABASE_URL environment variable
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'postgres-db',  # This should match the name in `render.yaml`
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL', 'postgres://postgres:postgres@db:5432/postgres'))
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -83,7 +79,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files configuration
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
