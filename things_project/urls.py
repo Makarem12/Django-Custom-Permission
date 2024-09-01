@@ -21,3 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/things_app/',include('things_app.urls'))
 ]
+# this is comment
+print("hi")
